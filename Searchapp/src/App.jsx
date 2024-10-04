@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import {Checkbox} from './components/forms/checkbox'
 import {Input} from './components/forms/input'
+import { ProductCategoryRow } from './components/products/ProductCategoryRow'
+import { ProductRow } from './components/products/productRow'
 
 const PRODUCTS = [  
   {category: "Fruits", price: "$1", stocked: true, name: "Apple"},  
@@ -13,28 +15,58 @@ const PRODUCTS = [
 
 function App() {
 
+  const [showStockedOnly, setshowStockedOnly] = useState(false)
+  const [search, setSearch] = useState("")
+
   return (
     <div className='container my-3'>
-    <Searchbar></Searchbar>
+    <Searchbar showStockedOnly={showStockedOnly} onStockedOnlyChange={setshowStockedOnly} search={search} onSearchChange={setSearch} />
     <ProductTable products={PRODUCTS}></ProductTable>
     </div>
   )
   
-  function Searchbar() {
+  function Searchbar({showStockedOnly, onStockedOnlyChange, onSearchChange, search}) {
     return <div className="mb-3">
-      <Input value="" placeholder="Entrer votre recherche ici" onChange={() => null}></Input>
-      <Checkbox checked="" id="stocked" onChange={() => null} label="N'afficher que les produits en stock"></Checkbox>
+      <Input 
+      value={search}
+      placeholder="Entrer votre recherche ici" 
+      onChange={onSearchChange}
+      />
+
+      <Checkbox 
+      checked={showStockedOnly} 
+      id="stocked" 
+      onChange={onStockedOnlyChange} 
+      label="N'afficher que les produits en stock" 
+      />
+
     </div>
   }
 
   function ProductTable ({products}){
-    return <table>
+    const rows = []
+
+    let lastCategory = null
+
+  for (let product of products){  
+    if(product.category !== lastCategory){
+      rows.push(<ProductCategoryRow key={product.category} name={product.category} />)
+    }
+
+    lastCategory = product.category
+    rows.push(<ProductRow product={product} key={product.name} />)
+  }
+
+    return <table className='table'>
       <thead>
         <tr>
           <th>Nom</th>
           <th>Prix</th>
         </tr>
       </thead>
+      <tbody>
+        {rows}
+      </tbody>
     </table>
   }
 }
