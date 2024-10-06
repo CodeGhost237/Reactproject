@@ -27,6 +27,7 @@ function Searchbar({showStockedOnly, onStockedOnlyChange, onSearchChange, search
     onChange={onStockedOnlyChange} 
     label="N'afficher que les produits en stock" 
     />
+    <input type="range" name="" id="" className='form-range' max={10} min={0} />
 
   </div>
 }
@@ -63,10 +64,22 @@ function App() {
   const [showStockedOnly, setshowStockedOnly] = useState(false)
   const [search, setSearch] = useState("")
 
+  const visibleproducts = PRODUCTS.filter((product) =>{
+    if(showStockedOnly && !product.stocked){
+      return false
+    }
+
+    if(search && !product.name.toLowerCase().includes(search.toLowerCase())){
+      return false
+    }
+  
+    return true
+  })
+
   return (
     <div className='container my-3'>
     <Searchbar showStockedOnly={showStockedOnly} onStockedOnlyChange={setshowStockedOnly} search={search} onSearchChange={setSearch} />
-    <ProductTable products={PRODUCTS}></ProductTable>
+    <ProductTable products={visibleproducts}></ProductTable>
     </div>
   )
 }
