@@ -13,6 +13,51 @@ const PRODUCTS = [
   {category: "Vegetables", price: "$1", stocked: true, name: "Peas"}  
 ]
 
+function Searchbar({showStockedOnly, onStockedOnlyChange, onSearchChange, search}) {
+  return <div className="mb-3">
+    <Input 
+    value={search}
+    placeholder="Entrer votre recherche ici" 
+    onChange={onSearchChange}
+    />
+
+    <Checkbox 
+    checked={showStockedOnly} 
+    id="stocked" 
+    onChange={onStockedOnlyChange} 
+    label="N'afficher que les produits en stock" 
+    />
+
+  </div>
+}
+
+function ProductTable ({products}){
+  const rows = []
+
+  let lastCategory = null
+
+for (let product of products){  
+  if(product.category !== lastCategory){
+    rows.push(<ProductCategoryRow key={product.category} name={product.category} />)
+  }
+
+  lastCategory = product.category
+  rows.push(<ProductRow product={product} key={product.name} />)
+}
+
+  return <table className='table'>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prix</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows}
+    </tbody>
+  </table>
+}
+
 function App() {
 
   const [showStockedOnly, setshowStockedOnly] = useState(false)
@@ -24,51 +69,6 @@ function App() {
     <ProductTable products={PRODUCTS}></ProductTable>
     </div>
   )
-  
-  function Searchbar({showStockedOnly, onStockedOnlyChange, onSearchChange, search}) {
-    return <div className="mb-3">
-      <Input 
-      value={search}
-      placeholder="Entrer votre recherche ici" 
-      onChange={onSearchChange}
-      />
-
-      <Checkbox 
-      checked={showStockedOnly} 
-      id="stocked" 
-      onChange={onStockedOnlyChange} 
-      label="N'afficher que les produits en stock" 
-      />
-
-    </div>
-  }
-
-  function ProductTable ({products}){
-    const rows = []
-
-    let lastCategory = null
-
-  for (let product of products){  
-    if(product.category !== lastCategory){
-      rows.push(<ProductCategoryRow key={product.category} name={product.category} />)
-    }
-
-    lastCategory = product.category
-    rows.push(<ProductRow product={product} key={product.name} />)
-  }
-
-    return <table className='table'>
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Prix</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows}
-      </tbody>
-    </table>
-  }
 }
 
 export default App
