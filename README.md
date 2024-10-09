@@ -62,3 +62,7 @@ unless you want to contribute back to the upstream project.
 [index.html]: https://gitlab.com/pages/plain-html/blob/master/public/index.html
 [userpages]: https://docs.gitlab.com/ce/user/project/pages/introduction.html#user-or-group-pages
 [projpages]: https://docs.gitlab.com/ce/user/project/pages/introduction.html#project-pages
+
+## DashDash Screenshots
+![DashDash](https://github.com/user-attachments/assets/8efc94b8-6724-4289-a33a-c741c7a77936)
+
