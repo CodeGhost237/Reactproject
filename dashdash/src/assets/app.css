@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+* {
+    font-family: "Afacad Flux", sans-serif;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    user-select: none;
+    cursor: pointer;
+}
+
+h1 {
+    font-family: 'Nunito sans', sans-serif;
+    text-align: center;
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.underline {
+    content: "";
+    width: 10px;
+    height: 20px;
+    background-color: pink;
+}
+
+.circle {
+    position: absolute;
+    background: red;
+    content: "";
+    width: 15px;
+    height: 15px;
+    top: -5px;
+    right: -5px;
+    border: 2px solid #fff;
+}
+
+#pink {
+    background: #ffb222;
+    color: #fff;
+}
+
+#pink:hover {
+    background-color: #f39f03;
+}
+
+#gray {
+    color: #111;
+}
+
+#otherp {
+    font-family: 'Nunito sans';
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-slide-in {
+    opacity: 0;
+    /* Commence avec les cartes cachées */
+    animation: slideDown 0.5s ease-out forwards;
+}
+#btn:hover{
+    background-color: #fafafa;
+}
