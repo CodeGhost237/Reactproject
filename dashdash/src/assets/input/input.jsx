@@ -1,6 +1,6 @@
-export function Input({placeholder, value, label, onChange,type}){
+export function Input({placeholder, value, onChange,type}){
 
-    const style = {fontSize: "19px"}
+    const style = {fontSize: "15px"}
 
     return(
     <>
