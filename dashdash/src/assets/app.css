@@ -106,7 +106,7 @@ h1 {
     /* Commence avec les cartes cachées */
     animation: slideDown 0.5s ease-out forwards;
 }
-#btn:hover{
+#btn:hover, #btn.active {
     background-color: #fafafa;
 }
 

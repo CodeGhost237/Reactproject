@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './assets/app.css'
 import { Card } from './assets/card/card'
 import { Input } from './assets/input/input'
@@ -49,6 +49,26 @@ function Body() {
     setCurrentPage(1); // Réinitialiser à la première page lors de la recherche
   };
 
+  // Fonction pour trier les cartes par date (plus récent)
+  const sortByMostRecent = () => {
+    const sortedCards = [...filteredCards].sort((a, b) => {
+      const dateA = new Date(a.date.split("/").reverse().join("-"));
+      const dateB = new Date(b.date.split("/").reverse().join("-"));
+      return dateB - dateA; // Trier du plus récent au plus ancien
+    });
+    setFilteredCards(sortedCards);
+  };
+
+  // Fonction pour trier les cartes par date (plus ancien)
+  const sortByOldest = () => {
+    const sortedCards = [...filteredCards].sort((a, b) => {
+      const dateA = new Date(a.date.split("/").reverse().join("-"));
+      const dateB = new Date(b.date.split("/").reverse().join("-"));
+      return dateA - dateB; // Trier du plus ancien au plus récent
+    });
+    setFilteredCards(sortedCards);
+  };
+
   // Logique de pagination
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
@@ -71,18 +91,22 @@ function Body() {
             </button>
 
             <div className="d-flex align-items-center">
-              <button className="btn p-2 border me-1 option" id="btn">Plus récent</button>
-              <button className="btn p-2 border ms-1 option" id="btn">Plus ancien</button>
+              <button className="btn p-2 border me-1 option" id="btn" onClick={sortByMostRecent}>
+                Plus récent
+              </button>
+              <button className="btn p-2 border ms-1 option" id="btn" onClick={sortByOldest}>
+                Plus ancien
+              </button>
             </div>
           </div>
         </div>
 
         {currentCards.length === 0 ? (
           <div className="d-flex flex-column justify-content-center align-items-center mt-3">
-            <img src="./undraw.svg" alt="" width={400} height={250} />
-            <h3 className="text-center mt-5 fs-1 fw-bold">OUPS!</h3>
+            <img src="./undraw.svg" alt="" width={350} height={250} />
+            <h3 className="text-center mt-5 fs-2 fw-bold">OUPS!</h3>
             <p className="fs-6" id="gray">Aucun compte trouvé pour le moment.</p>
-            <button className="btn" id="pink" onClick={handleShowModal}>Ajouter un compte</button>
+            <button className="btn mb-3" id="pink" onClick={handleShowModal}>Ajouter un compte</button>
           </div>
         ) : (
           <>
@@ -137,6 +161,7 @@ function Body() {
     </>
   );
 }
+
 
 function Footer() {
 
