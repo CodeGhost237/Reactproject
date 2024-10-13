@@ -104,7 +104,7 @@ function Body() {
         {currentCards.length === 0 ? (
           <div className="d-flex flex-column justify-content-center align-items-center mt-3">
             <img src="./undraw.svg" alt="" width={350} height={250} />
-            <h3 className="text-center mt-5 fs-2 fw-bold">OUPS!</h3>
+            <h3 className="text-center mt-1 fs-2 fw-bold">OUPS!</h3>
             <p className="fs-6" id="gray">Aucun compte trouvé pour le moment.</p>
             <button className="btn mb-3" id="pink" onClick={handleShowModal}>Ajouter un compte</button>
           </div>
